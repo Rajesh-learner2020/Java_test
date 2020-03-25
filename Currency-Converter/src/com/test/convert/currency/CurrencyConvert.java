@@ -11,11 +11,11 @@ public class CurrencyConvert {
 
 	private void convertDenomination(int totalCents, LinkedHashMap<Integer, String> denum ){
 		// Convert Calculation
-		
+
 		Set<Integer> denums = denum.keySet();
 		Integer[] myArray = new Integer[denums.size()];
 		denums.toArray(myArray);
-		
+
 		int[] output = new int[denums.size()];
 
 		for(int i = 0 ; i< denums.size(); i++){
@@ -47,32 +47,33 @@ public class CurrencyConvert {
 
 		System.out.println("Enter a number of cents here: ");
 		int  totalCents = centInput.nextInt();	
-		
+
 		Scanner denominationType = new Scanner(System.in);
 
 		System.out.println("Enter currency type: ");
 		String  currencyType = denominationType.next();	
-		
-		
-		
+
+
+
 		List<String> denumType = new ArrayList<>();
 		denumType.add("USD");
 		denumType.add("EUR");// Add more types in future
-		
-		
+
+
 		HashMap<String, Denomination> instanceMap = new HashMap<>();
-		
+
 		instanceMap.put("USD", new DenominationUSA());
 		instanceMap.put("EUR", new DenominationEURO()); // create more objects here in future
 		Denomination denum = null;
 		if(denumType.contains(currencyType)){
-			 denum = instanceMap.get(currencyType);
+			denum = instanceMap.get(currencyType);
+			CurrencyConvert cc= new CurrencyConvert();
+
+			cc.convertDenomination(totalCents,denum.getDenominationMap());	
 		}else{
 			System.out.println("Enter valid denomination type");
 		}
-				
-		CurrencyConvert cc= new CurrencyConvert();
-		
-		cc.convertDenomination(totalCents,denum.getDenominationMap());		
+
+
 	}
 }
